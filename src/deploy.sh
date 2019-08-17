@@ -17,7 +17,7 @@ cd "${GITHUB_WORKSPACE}" || exit 1
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-if git diff --exit-code -s HEAD "${REMOTE_REPO}"/"${GITHUB_REF}" -- . ':!node_modules'; then
+if git diff --exit-code -s HEAD "${REMOTE_REPO}" -- . ':!node_modules'; then
     :
 else
     echo HEAD outdated
