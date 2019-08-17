@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/action-deploy@release/v0
+    - uses: actions/action-deploy@v0-release
       with:
-        ref: 'refs/heads/release/snapshot'
+        ref: 'refs/heads/snapshot-release'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
