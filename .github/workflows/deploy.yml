@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: bumfo/action-deploy@release/v0
+    - uses: bumfo/action-deploy@v1
       with:
         ref: 'refs/heads/release/snapshot'
       env:
