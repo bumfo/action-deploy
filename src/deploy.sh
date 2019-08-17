@@ -19,8 +19,10 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 git remote add dist "${REMOTE_REPO}" || exit 1
 
-git fetch || exit 1
-if git diff --exit-code -s HEAD dist/"${GITHUB_REF##*/}" -- . ':!node_modules'; then
+BRANCH=${GITHUB_REF#"refs/heads/"}
+
+git fetch dist "${BRANCH}" || exit 1
+if git diff --exit-code -s HEAD..dist/"${BRANCH}" -- . ':!node_modules'; then
     :
 else
     echo HEAD outdated
