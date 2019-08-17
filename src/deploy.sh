@@ -19,7 +19,8 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 git remote add dist "${REMOTE_REPO}" || exit 1
 
-if git diff --exit-code -s HEAD dist/"${GITHUB_REF}" -- . ':!node_modules'; then
+git fetch || exit 1
+if git diff --exit-code -s HEAD..dist -- . ':!node_modules'; then
     :
 else
     echo HEAD outdated
