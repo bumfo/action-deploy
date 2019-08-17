@@ -17,7 +17,9 @@ cd "${GITHUB_WORKSPACE}" || exit 1
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-if git diff --exit-code -s HEAD "${REMOTE_REPO}" -- . ':!node_modules'; then
+git remote add dist "${REMOTE_REPO}" || exit 1
+
+if git diff --exit-code -s HEAD dist/"${GITHUB_REF}" -- . ':!node_modules'; then
     :
 else
     echo HEAD outdated
@@ -34,7 +36,7 @@ git add -f node_modules
 git add .
 
 if git commit -am "Deployed From Action ${GITHUB_ACTION}"; then
-    git push -f "${REMOTE_REPO}" HEAD:"${REF}"
+    git push -f dist HEAD:"${REF}"
     exit "$?"
 else
     echo Nothing to push
